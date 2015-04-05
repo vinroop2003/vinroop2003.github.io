@@ -23,8 +23,8 @@ h1{
 
 #SudokuTable {
 	border-collapse: collapse;
-	width: 35%;
-	height: 60%;
+	width: 30%;
+	height: 30%;
 }
 
 .box{
