@@ -12,23 +12,33 @@
 							];
 		
 		// Now iterate through the grid and fill the init state
-		var rows = document.getElementById('SudokuTable').getElementsByTagName('tr');
-		for(var i = 0; i < rows.length; i++) {
-			var cols = rows[i].getElementsByTagName("input");
+		var boxRows = document.getElementById('SudokuTable').getElementsByClassName('boxes'); 
 		
-			for(var j = 0; j < cols.length; j++) {
-				if(partialState[i][j] !== '') {
-					cols[j].value = partialState[i][j];
-					$(cols[j]).addClass("initialValue");
-					$(cols[j]).attr("readonly", true);
+		for(var i = 0; i < boxRows.length; i++) {
+			var boxes = boxRows[i].getElementsByClassName('box');
+			for(var j = 0; j < boxes.length; j++ )
+			{
+				var rows = boxes[j].getElementsByClassName('row'); 
+				for(var k = 0; k < rows.length; k++) {
+					var cols = rows[k].getElementsByTagName("input");
+
+					for(var l = 0; l < cols.length; l++) {
+						var x = i*3 + k ;
+						var y = j*3 + l;
+						if(partialState[x][y] !== '') {
+							cols[l].value = partialState[x][y];
+							$(cols[l]).addClass("initialValue");
+							$(cols[l]).attr("readonly", true);
+						}
+						else
+							cols[l].value = '';
+					}
 				}
-				else
-					cols[j].value = '';
 			}
 		}
 	};
 
-	var verifySolution = function() {
+	var verifySolution = function(finalCheck) {
 		var FinalState = [[5, 3, 4, 6, 7, 8, 9, 1, 2], 
 							[6, 7, 2, 1, 9, 5, 3, 4, 8],
 							[1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -40,18 +50,32 @@
 							[3, 4, 5, 2, 8, 6, 1, 7, 9]
 							];	
 							
-	var rows = document.getElementById('SudokuTable').getElementsByTagName('tr');
-		for(var i = 0; i < rows.length; i++) {
-			var cols = rows[i].getElementsByTagName("input");
-		
-			for(var j = 0; j < cols.length; j++) {
-				if( cols[j].value !== FinalState[i][j]) {
-					return false;
-				}
-			}			
+	var boxRows = document.getElementById('SudokuTable').getElementsByClassName('boxes'); 
+	// Global Variable
+	
+	for(var i = 0; i < boxRows.length; i++) {
+			var boxes = boxRows[i].getElementsByClassName('box');
+			for(var j = 0; j < boxes.length; j++ )
+			{
+				var rows = boxes[j].getElementsByClassName('row'); 
+				for(var k = 0; k < rows.length; k++) {
+					var cols = rows[k].getElementsByTagName("input");
+
+					for(var l = 0; l < cols.length; l++) {
+						var x = i*3 + k ;
+						var y = j*3 + l;
+						
+						if(finalCheck || cols[l].value !== "") {
+							if( parseInt(cols[l].value) !== FinalState[x][y]) {
+								return false;
+							}
+						}
+					}
+				}		
+			}
 			return true;
 		}
-};
+	};
 
 var isNumeric = function(num) {
 		if(num >= 0 && num <= 9)
@@ -60,23 +84,41 @@ var isNumeric = function(num) {
 	};
 
 $(document).ready(function() {
-	var rows = 9;
-	var cols = 9;
 	
 	var tbody = '';	
 	
+for(var a = 0; a < 3; a++) {	
 	// first create an empty grid
-	for(var i = 0; i < rows; i++) {
-		tbody += "<tr class='row"+ i + "'>";
-		for(var j = 0; j < cols; j++) {
-			tbody += "<td> <input onkeypress="return isNumeric()" size='1' maxlength='1' formnovalidate='isNumeric'></input></td>";
-		}
-		 tbody += "</tr> ";
+	for(var x= 0; x < 3; x++) {
+		tbody += "<td><table class='box'> ";
+			for(var i = 0; i < 3; i++) {
+			tbody += "<tr class='row'>";
+				for(var j = 0; j < 3; j++) {
+				tbody += "<td> <input size='1' maxlength='1' formnovalidate='isNumeric'></input></td>";
+				}
+			tbody += "</tr> ";
+			}
+		tbody += "</td></table>";
+	document.getElementById("SudokuTable").getElementsByClassName("boxes")[a].innerHTML = tbody;	
+	
 	}
-	document.getElementById("SudokuTable").innerHTML = tbody;
+	tbody = "";
+};
+	
+	$("#checkPartial").click(function() {
+		
+		
+		if(verifySolution(false) === true) {
+			$('#showResult').text("You are doing good!");
+		}
+		else {
+			$('#showResult').text("Its not quite right");
+		}
+		wrongVal = false;
+	});
 	
 	$("#submit").click(function() {
-		var result = verifySolution();
+		var result = verifySolution(true);
 		if(result === true) {
 			$('#showResult').text("BINGO! THIS IS A CORRECT SOLUTION");
 		}
@@ -91,9 +133,5 @@ $(document).ready(function() {
 	});
 		
 	fillPartialState();
-	
-		
-	
-	
 	
 });

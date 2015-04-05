@@ -17,7 +17,12 @@ h1{
 #SudokuTable {
 border-collapse: collapse;
 }
-		
+
+.boxes {border-collapse: collapse;}
+.box{
+border-collapse: collapse;
+	border: 1px solid black;
+}		
 td{
   color: brown;
   width: 15px;
@@ -58,6 +63,14 @@ input {
 
 .tableBottom{
 	margin: 10px;
+}
+
+#checkPartial{
+	width: 40px;
+	height:40px;
+	border: 2px outset white;
+	margin-top: 3px;
+	cursor: pointer;
 }
 
 
