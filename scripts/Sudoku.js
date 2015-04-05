@@ -51,7 +51,6 @@
 							];	
 							
 	var boxRows = document.getElementById('SudokuTable').getElementsByClassName('boxes'); 
-	// Global Variable
 	
 	for(var i = 0; i < boxRows.length; i++) {
 			var boxes = boxRows[i].getElementsByClassName('box');
@@ -73,8 +72,8 @@
 					}
 				}		
 			}
-			return true;
 		}
+		return true;
 	};
 
 var isNumeric = function(num) {
@@ -106,15 +105,12 @@ for(var a = 0; a < 3; a++) {
 };
 	
 	$("#checkPartial").click(function() {
-		
-		
 		if(verifySolution(false) === true) {
 			$('#showResult').text("You are doing good!");
 		}
 		else {
 			$('#showResult').text("Its not quite right");
 		}
-		wrongVal = false;
 	});
 	
 	$("#submit").click(function() {

@@ -14,6 +14,7 @@ h1{
 	font: arial;
 	text-align: center;
 }
+
 #SudokuTable {
 border-collapse: collapse;
 }
@@ -44,7 +45,7 @@ input {
 }
 #submit, #clear {
 	width: 160px;
-	height: 40px;
+	height: 51px;
 	color: white;
 	text-align: center;
 	background-color: #30A0EA;
@@ -57,20 +58,21 @@ input {
 #showResult{
 	color: white;
 	font-weight: bold;
-	margin: 10px;
+	margin: 5px;
 	font-size: x-large;	
 }
 
 .tableBottom{
-	margin: 10px;
+	margin: 5px;
 }
 
 #checkPartial{
-	width: 40px;
-	height:40px;
+	width: 55px;
+	height:48px;
 	border: 2px outset white;
 	margin-top: 3px;
 	cursor: pointer;
+	margin-bottom: -18px;
 }
 
 
