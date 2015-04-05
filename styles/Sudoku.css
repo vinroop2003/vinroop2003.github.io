@@ -1,0 +1,63 @@
+
+body {
+ background-image: url("background.jpg");
+ background-repeat: no-repeat;
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: auto;
+}
+
+h1{
+	color: white;
+	font: arial;
+	text-align: center;
+}
+#SudokuTable {
+border-collapse: collapse;
+}
+		
+td{
+  color: brown;
+  width: 15px;
+}
+
+input {
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	font-size: x-large;
+	border-style: groove;
+}
+.initialValue{
+	font-weight: bold;
+	color: #0033CC;
+	background-color: #E0F0FF
+	
+	
+}
+#submit, #clear {
+	width: 160px;
+	height: 40px;
+	color: white;
+	text-align: center;
+	background-color: #30A0EA;
+	font-weight: bold;
+	cursor: pointer;
+	border: 2px outset white;
+	
+}
+
+#showResult{
+	color: white;
+	font-weight: bold;
+	margin: 10px;
+	font-size: x-large;	
+}
+
+.tableBottom{
+	margin: 10px;
+}
+
+
