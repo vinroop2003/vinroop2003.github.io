@@ -1,4 +1,4 @@
-	// populate grid with a partial state of Sudoku
+	// populate grid with a initial partial state of Sudoku
 	var fillPartialState = function() {
 		var partialState = [[5, 3, '', '', 7, '', '', '', ''], 
 							[6, '', '', 1, 9, 5, '', '', ''],
@@ -11,9 +11,9 @@
 							['', '', '', '', 8, '', '', 7, 9]
 							];
 		
-		// Now iterate through the grid and fill the init state
 		var boxRows = document.getElementById('SudokuTable').getElementsByClassName('boxes'); 
 		
+		// Iterate through all the inner tables and fill the init state of the board
 		for(var i = 0; i < boxRows.length; i++) {
 			var boxes = boxRows[i].getElementsByClassName('box');
 			for(var j = 0; j < boxes.length; j++ )
@@ -38,6 +38,7 @@
 		}
 	};
 
+	// Verify the state of the board, The variable finalCheck distinguishes between full board check or partial board check
 	var verifySolution = function(finalCheck) {
 		var FinalState = [[5, 3, 4, 6, 7, 8, 9, 1, 2], 
 							[6, 7, 2, 1, 9, 5, 3, 4, 8],
@@ -76,34 +77,28 @@
 		return true;
 	};
 
-var isNumeric = function(num) {
-		if(num >= 0 && num <= 9)
-			return true;
-		return false;
-	};
 
 $(document).ready(function() {
-	
 	var tbody = '';	
 	
-for(var a = 0; a < 3; a++) {	
-	// first create an empty grid
-	for(var x= 0; x < 3; x++) {
-		tbody += "<td><table class='box'> ";
+	for(var a = 0; a < 3; a++) {	
+		// first create an empty board
+		for(var x= 0; x < 3; x++) {
+			tbody += "<td><table class='box'> ";
 			for(var i = 0; i < 3; i++) {
-			tbody += "<tr class='row'>";
+				tbody += "<tr class='row'>";
 				for(var j = 0; j < 3; j++) {
-				tbody += "<td> <input size='1' maxlength='1' formnovalidate='isNumeric'></input></td>";
+					tbody += "<td> <input size='1' maxlength='1' formnovalidate='isNumeric'></input></td>";
 				}
-			tbody += "</tr> ";
+				tbody += "</tr> ";
 			}
-		tbody += "</td></table>";
-	document.getElementById("SudokuTable").getElementsByClassName("boxes")[a].innerHTML = tbody;	
+			tbody += "</td></table>";
+			document.getElementById("SudokuTable").getElementsByClassName("boxes")[a].innerHTML = tbody;	
+		}
+		tbody = "";
+	};
 	
-	}
-	tbody = "";
-};
-	
+	// Bind events to check partial board state
 	$("#checkPartial").click(function() {
 		if(verifySolution(false) === true) {
 			$('#showResult').text("You are doing good!");
@@ -113,6 +108,7 @@ for(var a = 0; a < 3; a++) {
 		}
 	});
 	
+	// Bind submit button event
 	$("#submit").click(function() {
 		var result = verifySolution(true);
 		if(result === true) {
@@ -123,6 +119,7 @@ for(var a = 0; a < 3; a++) {
 		}
 	});
 	
+	// Bind clear button event
 	$("#clear").click(function() {
 		$("#showResult").empty();
 		fillPartialState();

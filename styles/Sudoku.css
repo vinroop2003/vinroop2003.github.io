@@ -7,6 +7,12 @@ body {
   -o-background-size: cover;
   background-size: cover;
   overflow: auto;
+
+}
+
+html, body
+{
+  height: 100%;
 }
 
 h1{
@@ -16,33 +22,30 @@ h1{
 }
 
 #SudokuTable {
-border-collapse: collapse;
+	border-collapse: collapse;
+	width: 35%;
+	height: 60%;
 }
 
-.boxes {border-collapse: collapse;}
 .box{
-border-collapse: collapse;
-	border: 1px solid black;
+	border-collapse: collapse;
+	border: 1px solid black;	
 }		
-td{
-  color: brown;
-  width: 15px;
-}
 
 input {
-	text-align: center;
-	width: 50px;
-	height: 50px;
+	text-align: center;	
 	font-size: x-large;
 	border-style: groove;
+	height: 50px;
+	width: 50px;
+
 }
 .initialValue{
 	font-weight: bold;
 	color: #0033CC;
-	background-color: #E0F0FF
-	
-	
+	background-color: #E0F0FF;	
 }
+
 #submit, #clear {
 	width: 160px;
 	height: 51px;
@@ -52,7 +55,6 @@ input {
 	font-weight: bold;
 	cursor: pointer;
 	border: 2px outset white;
-	
 }
 
 #showResult{
